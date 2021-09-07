@@ -129,14 +129,60 @@
   width: 100%;
   border-top: solid 1px #ccc;
   background-color: #fff;
+  @media all and (max-width: 375px) {
+    position: fixed;
+    height: 290px;
+    bottom: -290px;
+    padding: 0;
+  }
 }
 .post-form-bar {
   border: solid 2px #ccc;
   margin: 8px 8px -10px 8px;
   padding: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  @media all and (max-width: 375px) {
+    flex-direction: column;
+    .post-form-bar-items{
+      margin: 8px;
+      input[type="file"]{
+        width: 100%;
+      }
+      .send-button{
+        width: 100%;
+      }
+    }
+  }
 }
+
+.bottom-up{
+  animation: bottomup 1s;
+  bottom: 0;
+}
+@keyframes bottomup {
+  0% {
+  transform: translateY(290px);
+  }
+
+  100% {
+  transform: translateY(0px);
+  }
+}
+.bottom-down{
+  animation: bottomdown 1s;
+  bottom: -290px;
+}
+@keyframes bottomdown {
+  0% {
+  transform: translateY(0px);
+  }
+
+  100% {
+  transform: translateY(-290px);
+  }
+}
+
 .post-form-bar .send-button {
   width: 150px;
   line-height: 32px;
@@ -203,6 +249,10 @@ $send-message-color: #D4F0FF;
   border-radius: 12px 0px 12px 12px!important;
   border: solid 1px darken($send-message-color, 10%);
   margin: 8px 0px 8px 16px!important;
+}
+.send-files{
+  line-height: 30px;
+  box-sizing: border-box;
 }
 
 /*************************

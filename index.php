@@ -144,12 +144,12 @@ if(!empty($subject)){
 
         <div id="lastPostView"></div>
       </div>
-      <div class="post-form">
+      <div id="postForm" class="post-form">
         <form action="">
           <div class="post-form-wrap">
             <div class="post-form-bar">
-              <div></div>
-              <div><button class="send-button">送信</button></div>
+              <div class="post-form-bar-items"><input class="send-files" type="file"></div>
+              <div class="post-form-bar-items"><button class="send-button">送信</button></div>
             </div>
             <div class="post-form-body">
               <textarea name="" id="" placeholder="メッセージ入力"></textarea>
@@ -218,6 +218,7 @@ $('.close-mask').on('click',
 );
 
 $(".chat-body").animate({scrollTop:$('#lastPostView').offset().top}, { duration: 1000, easing: 'swing', });
+
 </script>
 
 <script>
