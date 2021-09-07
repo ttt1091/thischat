@@ -61,7 +61,7 @@ $myId = 1;
   $manager_que = $dbh->query("SELECT * FROM `managers` WHERE `status` = '1' AND `group` = 'site01'");
   while($managers = $manager_que->fetch(PDO::FETCH_ASSOC)){
 ?>
-        <div class="chat-list-items"><a href="https://ubuntu-2nd/thechat/?target=<?= $managers['id']; ?>"><?= $managers['name']; ?></a></div>
+        <div class="chat-list-items"><a href="/thechat/?target=<?= $managers['id']; ?>"><?= $managers['name']; ?></a></div>
 <?php } ?>
       </div>
     </div>
