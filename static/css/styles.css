@@ -1,0 +1,326 @@
+@font-face {
+  font-family: "KosugiMaru";
+  src: url("static/fonts/KosugiMaru-Regular.ttf");
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.left-col {
+  border-right: solid 1px #ccc;
+  background-color: #e5ebf0;
+  height: calc(100vh - 56px);
+  width: 250px;
+}
+
+.message-col {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: calc(100vh - 56px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+.right-col {
+  border-left: solid 1px #ccc;
+  background-color: #f2f2f2;
+  height: calc(100vh - 56px);
+  width: 300px;
+}
+
+.btn-991 {
+  display: none;
+}
+
+.close-mask {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vh;
+  z-index: 1031;
+}
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .btn-991 {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+  .left-btn {
+    display: none;
+  }
+  .right-btn {
+    border-radius: 0.3rem !important;
+  }
+  .right-col {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: calc(100vh);
+    z-index: 1032;
+  }
+  button[data-btn="leftbtn"] {
+    display: none;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .btn-991 {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+  .left-btn {
+    display: inline-block;
+  }
+  .left-col {
+    position: fixed;
+    top: 0;
+    height: calc(100vh);
+    left: -300px;
+    z-index: 1032;
+  }
+  .right-col {
+    position: fixed;
+    right: -300px;
+    height: calc(100vh);
+    z-index: 1032;
+  }
+}
+
+/*************************
+*  LeftColmuns
+*************************/
+.chat-list-ttl {
+  padding: 0 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 48px;
+  background-color: rgba(68, 68, 68, 0.2);
+}
+
+.chat-list-items {
+  padding: 0 8px;
+  font-size: 1.2rem;
+  line-height: 48px;
+}
+
+.chat-list-items a {
+  text-decoration: none;
+  color: #444;
+  display: block;
+  margin: 8px 0px;
+  border: solid 1px #aaf;
+  background-color: #eef;
+  border-radius: 4px;
+  padding: 0px 8px;
+}
+
+.chat-active a {
+  background-color: #fee;
+  border-color: #faa;
+}
+
+.chat-ttl {
+  width: 100%;
+  padding: 0 8px;
+  height: 48px;
+  line-height: 48px;
+  border-bottom: solid 1px #ccc;
+  background-color: #f2f3ef;
+  font-weight: bold;
+}
+
+.chat-body {
+  overflow: auto;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  padding-bottom: 30vh;
+}
+
+.post-form {
+  padding: 8px;
+  width: 100%;
+  border-top: solid 1px #ccc;
+  background-color: #fff;
+}
+
+.post-form-bar {
+  border: solid 2px #ccc;
+  margin: 8px 8px -10px 8px;
+  padding: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.post-form-bar .send-button {
+  width: 150px;
+  line-height: 32px;
+  border-radius: none;
+  outline: none;
+  background-color: #add8e6;
+  border: solid 1px #add8e6;
+  color: #fff;
+}
+
+.post-form-body {
+  padding: 8px;
+}
+
+.post-form-body textarea {
+  height: 150px;
+  width: 100%;
+  border: solid 2px #ccc;
+  resize: none;
+  padding: 16px;
+}
+
+.chat-items {
+  border-bottom: solid 1px #ccc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.chat-items-thumb {
+  padding: 8px;
+}
+
+.chat-items-right {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  margin: 8px 16px 8px 0;
+  border-radius: 0px 12px 12px 12px;
+  border: solid 1px #ddd;
+  -webkit-box-shadow: 2px 2px 4px -2px gray;
+          box-shadow: 2px 2px 4px -2px gray;
+  position: relative;
+  display: inline-block;
+}
+
+.chat-items-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 8px 8px 4px 8px;
+}
+
+.chat-send-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #007acc;
+}
+
+.chat-send-time {
+  font-weight: bold;
+  color: #777;
+}
+
+.chat-items-body {
+  padding: 4px 8px 8px 8px;
+}
+
+.chat-items-thumb img {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  border: solid 1px #ccc;
+}
+
+.send-message {
+  background-color: #D4F0FF;
+  border-radius: 12px 0px 12px 12px !important;
+  border: solid 1px #a1deff;
+  margin: 8px 0px 8px 16px !important;
+}
+
+/*************************
+*  RightColmuns
+*************************/
+.right-info {
+  color: #888;
+  margin: 8px;
+  background-color: #fff;
+  max-height: 250px;
+  overflow: auto;
+}
+
+.right-info dl {
+  padding: 8px;
+}
+
+.right-info dl dt {
+  font-weight: bold;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding-bottom: 4px;
+}
+
+.right-info dl dd {
+  border-bottom: solid 1px #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.right-info dl dd .right-info-date,
+.right-info dl dd .right-info-user {
+  font-size: 0.9rem;
+}
+
+.right-info dl dd .right-info-body {
+  color: #444;
+}
+
+.right-info dl dd .right-info-user {
+  text-align: right;
+}
+
+.right-menu {
+  padding: 0;
+}
+
+.right-menu li {
+  margin: 4px;
+  list-style: none;
+}
+
+.right-menu li a {
+  padding: 8px;
+  display: block;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.right-menu li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*************************
+*  BootstrapSettings
+*************************/
+.row > * {
+  padding: 0;
+}
