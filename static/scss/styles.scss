@@ -130,6 +130,7 @@
   border-top: solid 1px #ccc;
   background-color: #fff;
   @media all and (max-width: 375px) {
+    display: none;
     position: fixed;
     height: 290px;
     bottom: -290px;
@@ -155,8 +156,31 @@
     }
   }
 }
+.mobile-call-form{
+  display: none;
+  @media all and (max-width: 375px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-color: #91B493;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    z-index: 99;
+  }
+  img{
+    height: 30px;
+    width: 30px;
+  }
+}
 
 .bottom-up{
+  display: block;
   animation: bottomup 1s;
   bottom: 0;
 }
@@ -170,16 +194,19 @@
   }
 }
 .bottom-down{
-  animation: bottomdown 1s;
-  bottom: -290px;
+  @media all and (max-width: 375px) {
+    display: block;
+    animation: bottomdown 1s;
+    bottom: -290px;
+  }
 }
 @keyframes bottomdown {
   0% {
-  transform: translateY(0px);
+  transform: translateY(-290px);
   }
 
   100% {
-  transform: translateY(-290px);
+  transform: translateY(0px);
   }
 }
 
@@ -188,8 +215,8 @@
   line-height: 32px;
   border-radius: none;
   outline: none;
-  background-color: #add8e6;
-  border: solid 1px #add8e6;
+  background-color: #33A6B8;
+  border: solid 1px #33A6B8;
   color: #fff;
 }
 .post-form-body {
@@ -201,6 +228,11 @@
   border: solid 2px #ccc;
   resize: none;
   padding: 16px;
+}
+.post-form-body textarea:focus-visible{
+  border-radius: 0;
+  border: solid 3px #F9BF45;
+  outline: none;
 }
 .chat-items {
   border-bottom: solid 1px #ccc;
@@ -253,6 +285,36 @@ $send-message-color: #D4F0FF;
 .send-files{
   line-height: 30px;
   box-sizing: border-box;
+}
+
+.unread-mail{
+  background-color: #E16B8C;
+  .chat-send-name,
+  .chat-send-time{
+    color: #FFF;
+  }
+  .chat-items-body{
+    display: flex;
+    justify-content: center;
+  }
+  .unread-alert{
+    display: table-cell;
+    border: solid 2px #FFF;
+    border-radius: 8px;
+    padding: 4px 32px;
+    cursor: pointer;
+    animation: unreadFlash 2s linear infinite;
+  }
+}
+
+@keyframes unreadFlash {
+  0%,100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 /*************************

@@ -6,7 +6,32 @@
 //  一時設定
 //////////////////////////////////////////
 
-$myId = 1;
+$myId = intval($_COOKIE['theChatYouID']);
+$my_profiles = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :myid");
+$my_profiles->execute(
+  [
+    'myid' => $myId,
+  ]
+);
+$myProf = $my_profiles->fetch(PDO::FETCH_ASSOC);
+$myName = $myProf['name'];
+
+if(isset($_POST['mode'])){
+  if($_POST['mode']=='read'){
+    $messageId = $_POST['messageId'];
+    $now = date('Y/m/d H:i:s');
+    $targetId = $_GET['target'];
+
+    $set_read_time = $dbh->prepare('UPDATE `messages` SET `opened_dt` = :now WHERE `messages`.`id` = :messageid');
+    $set_read_time->execute(
+      [
+        'now' => $now,
+        'messageid' => $messageId
+      ]
+    );
+    header('Location: /thechat/?target='.$targetId);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -66,11 +91,12 @@ $myId = 1;
       </div>
     </div>
     <div class="col-md message-col">
-      <div class="chat-ttl">○○とのチャットルーム</div>
+      <div class="chat-ttl">チャットルーム</div>
       <div class="chat-body">
 
 <?php
 if(isset($_GET['target'])){
+  $targetId = $_GET['target'];
   $select_mng = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :mid");
   $select_mng->execute(
     [
@@ -92,14 +118,17 @@ if(isset($_GET['target'])){
   while($messages = $select_message_mng->fetch(PDO::FETCH_ASSOC)){
     if(isset($messages['subject'])){ $subject = $messages['subject']; } else { $subject = ''; }
     $send = $messages['send'];
-    $body = $messages['body'];
+    $body = nl2br($messages['body']);
+    $openTime = $messages['opened_dt'];
+    $messageId = $messages['id'];
     if($send==$myId){
+    // Send Message
 ?>
 
         <div class="chat-items">
           <div class="chat-items-right send-message">
             <div class="chat-items-top">
-              <div class="chat-send-name"><?= $mname ?></div>
+              <div class="chat-send-name"><?= $myName ?></div>
               <div class="chat-send-time">2021/07/25 12:32</div>
             </div>
             <div class="chat-items-body">
@@ -116,7 +145,35 @@ if(!empty($subject)){
           <div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>
         </div>
 
-<?php } else { ?>
+<?php
+    } else {
+    // Receive Message
+    if($openTime=='1900-01-01 00:00:00'){
+    // unread
+?>
+        <div class="chat-items">
+          <div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>
+          <div class="chat-items-right unread-mail">
+            <div class="chat-items-top">
+              <div class="chat-send-name"><?= $mname ?></div>
+              <div class="chat-send-time">2021/07/25 12:32</div>
+            </div>
+            <div class="chat-items-body">
+              <div class="unread-alert">
+                <form action="" method="post">
+                  <input type="hidden" name="mode" value="read">
+                  <input type="hidden" name="messageId" value="<?= $messageId ?>">
+                  <input type="image" src="static/icons/png/unread_white.png" alt="">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<?php
+    } else {
+    // read
+?>
         <div class="chat-items">
           <div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>
           <div class="chat-items-right">
@@ -137,17 +194,26 @@ if(!empty($subject)){
           </div>
         </div>
 <?php
+      }
     }
   }
+} else {
+  $targetId = '';
 }
 ?>
 
         <div id="lastPostView"></div>
       </div>
-      <div id="postForm" class="post-form">
+
+      <div id="bottomUpButton" class="mobile-call-form">
+        <img src="static/icons/png/outline_edit_white_24dp.png" alt="">
+      </div>
+      <div id="postForm" class="post-form bottom-down">
         <form action="">
           <div class="post-form-wrap">
             <div class="post-form-bar">
+              <input type="hidden" name="mode" value="send">
+              <input type="hidden" name="target" value="<?= $targetId ?>">
               <div class="post-form-bar-items"><input class="send-files" type="file"></div>
               <div class="post-form-bar-items"><button class="send-button">送信</button></div>
             </div>
@@ -158,34 +224,9 @@ if(!empty($subject)){
         </form>
       </div>
     </div>
+
     <div class="right-col">
-      <div>
-        <div>
-          <h3>sidemenu</h3>
-          <div>
-            <?php
-            $ip = $_SERVER["REMOTE_ADDR"];
-            $ip = ip2long($ip);
-            echo $ip;
-            ?>
-            <br>
-
-            <?= makeRandStr(13) ?>
-          </div>
-          <div class="right-items">
-            <ul class="right-menu">
-              <li><a href="<?= $rootWebPath.'thechat' ?>">初期設定用</a></li>
-              <li><a href="">新規ユーザー登録</a></li>
-              <li><a href="">即時チャット履歴削除</a></li>
-            </ul>
-          </div>
-
-          <div class="right-items">
-<?php include($rootPath.'parts/right-info.php'); ?>
-          </div>
-          
-        </div>
-      </div>
+      <?php include($rootPath.'parts/right-default.php'); ?>
     </div>
   </div>
   <div class="close-mask" style="display: none;"></div>
@@ -219,6 +260,12 @@ $('.close-mask').on('click',
 
 $(".chat-body").animate({scrollTop:$('#lastPostView').offset().top}, { duration: 1000, easing: 'swing', });
 
+$('#bottomUpButton').on('click',
+  function(){
+    $('#postForm').toggleClass("bottom-up");
+    $('#postForm').toggleClass("bottom-down");
+  }
+);
 </script>
 
 <script>

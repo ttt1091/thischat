@@ -11,3 +11,6 @@ function makeRandStr($length) {
   }
   return $r_str;
 }
+
+session_start();
+setcookie('theChatYouID', '1', time()+43200);
