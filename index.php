@@ -1,7 +1,7 @@
 <?php include('/var/www/html/thechat/variable.php'); ?>
 <?php include('/var/www/html/thechat/setting/pdo.php'); ?>
 <?php
-
+ini_set( 'display_errors', 1 );
 //////////////////////////////////////////
 //  一時設定
 //////////////////////////////////////////
@@ -22,7 +22,7 @@ if(isset($_POST['mode'])){
     $now = date('Y/m/d H:i:s');
     $targetId = $_GET['target'];
 
-    $set_read_time = $dbh->prepare('UPDATE `messages` SET `opened_dt` = :now WHERE `messages`.`id` = :messageid');
+    $set_read_time = $dbh->prepare("UPDATE `messages` SET `opened_dt` = :now WHERE `messages`.`id` = :messageid");
     $set_read_time->execute(
       [
         'now' => $now,
@@ -30,6 +30,72 @@ if(isset($_POST['mode'])){
       ]
     );
     header('Location: /thechat/?target='.$targetId);
+    
+  } elseif( $_POST['mode'] == 'send' ) {
+    if(!empty($_POST['messageBody']||$_FILES['messageFile'])){
+      $mailkey = makeRandStr(13);
+      $target = $_POST['target'];
+      $now = date('Y/m/d H:i:s');
+      $myId = intval($_COOKIE['theChatYouID']);
+      $messagebody = h($_POST['messageBody']);
+
+      $tempfile = $_FILES['messageFile']['tmp_name'];
+      @list($file_name,$file_type) = explode(".",@$_FILES['messageFile']['name']);
+      $copy_file = date("Ymd-His") . "." . $file_type;
+      $copy_other_file = $file_name."-".date("Ymd-His") . "." . $file_type;
+      $updir = $rootPath.'upload/';
+      $image_list = ["png","jpeg","jpg","gif"];
+      str_replace($image_list, "", $file_type, $image_count);
+      if($image_count !== 0){
+        $filename = $updir.$copy_file;
+      } else {
+        $filename = $rootPath.'upload/' . $copy_other_file;
+      }
+      if (is_uploaded_file($tempfile)) {
+        if ( move_uploaded_file($tempfile , $filename )) {
+          if($image_count !== 0){
+            $file = $copy_file;
+          } else {
+            $file = $copy_other_file;
+          }
+        } else {
+          $file = '';
+        }
+      } else {
+        $file = '';
+      } 
+
+//      if(empty($_POST['messageFile'])){
+//        $file = '';
+//      } else {
+//        $file = $_FILES['messageFile'];
+//      }
+      if(empty($_POST['subject'])){
+        $subject = '';
+      } else {
+        $subject = h($_POST['subject']);
+      }
+
+      $insert_message = $dbh->prepare("INSERT INTO `messages` 
+        (`send`, `receive`, `subject`, `body`, `files`, `mail_key`, `sended_dt`, `created_dt`) VALUES 
+        (:sendid, :receiveid, :messagesubject, :body, :files, :mailkey, :sended, :created)
+      ");
+      $insert_message->execute(
+        [
+          'sendid' => $myId,
+          'receiveid' => $target,
+          'messagesubject' => $subject,
+          'body' => $messagebody,
+          'files' => $file,
+          'mailkey' => $mailkey,
+          'sended' => $now,
+          'created' => $now
+        ]
+      );
+      header('Location: /thechat/?target='.$target);
+    } else {
+      echo '<script>alert("メッセージを入力してください");</script>';
+    }
   }
 }
 ?>
@@ -51,6 +117,7 @@ if(isset($_POST['mode'])){
   <link href="static/css/styles.css?r=<?= rand(); ?>" rel="stylesheet">
   <script src="static/js/jquery-3.6.0.min.js"></script>
   <link rel="manifest" href="/manifest.json">
+  <script src='./sw.js'></script>
   <script>
 //     if ("serviceWorker" in navigator) {
 //       window.addEventListener("load", function () {
@@ -121,6 +188,11 @@ if(isset($_GET['target'])){
     $body = nl2br($messages['body']);
     $openTime = $messages['opened_dt'];
     $messageId = $messages['id'];
+    if(!empty($messages['files'])){
+      $upfile = $messages['files'];
+    } else {
+      $upfile = '';
+    }
     if($send==$myId){
     // Send Message
 ?>
@@ -135,9 +207,29 @@ if(isset($_GET['target'])){
 <?php
 if(!empty($subject)){
   echo '<div class="message-subject">'.$subject.'</div>';
-  echo '<div class="message-body">'.$body.'</div>';
+  if(empty($upfile)){
+    echo '<div class="message-body">'.$body.'</div>';
+  } else {
+    $image_list = ["png","jpeg","jpg","gif"];
+    str_replace($image_list, "", $upfile, $image_count);
+    if($image_count !== 0){
+      echo '<div class="message-body">'.'<div class="message-file"><a href="upload/'.$upfile.'" target="_blank"><img src="upload/'.$upfile.'"></a></div>'.$body.'</div>';
+    } else {
+      echo '<div class="message-body">'.'<div class="message-file"><span>'.$upfile.'</span></span><a href="upload/'.$upfile.'" target="_blank">ダウンロード</a></div>'.$body.'</div>';
+    }
+  }
 } else {
-  echo '<div class="message-body">'.$body.'</div>';
+  if(empty($upfile)){
+    echo '<div class="message-body">'.$body.'</div>';
+  } else {
+    $image_list = ["png","jpeg","jpg","gif"];
+    str_replace($image_list, "", $upfile, $image_count);
+    if($image_count !== 0){
+      echo '<div class="message-body">'.'<div class="message-file"><a href="upload/'.$upfile.'" target="_blank"><img src="upload/'.$upfile.'"></a></div>'.$body.'</div>';
+    } else {
+      echo '<div class="message-body">'.'<div class="message-file"><span>'.$upfile.'</span></span><a href="upload/'.$upfile.'" target="_blank">ダウンロード</a></div>'.$body.'</div>';
+    }
+  }
 }
 ?>
             </div>
@@ -185,9 +277,29 @@ if(!empty($subject)){
 <?php
 if(!empty($subject)){
   echo '<div class="message-subject">'.$subject.'</div>';
-  echo '<div class="message-body">'.$body.'</div>';
+  if(empty($upfile)){
+    echo '<div class="message-body">'.$body.'</div>';
+  } else {
+    $image_list = ["png","jpeg","jpg","gif"];
+    str_replace($image_list, "", $upfile, $image_count);
+    if($image_count !== 0){
+      echo '<div class="message-body">'.'<div class="message-file"><a href="upload/'.$upfile.'" target="_blank"><img src="upload/'.$upfile.'"></a></div>'.$body.'</div>';
+    } else {
+      echo '<div class="message-body">'.'<div class="message-file"><span>'.$upfile.'</span></span><a href="upload/'.$upfile.'" target="_blank">ダウンロード</a></div>'.$body.'</div>';
+    }
+  }
 } else {
-  echo '<div class="message-body">'.$body.'</div>';
+  if(empty($upfile)){
+    echo '<div class="message-body">'.$body.'</div>';
+  } else {
+    $image_list = ["png","jpeg","jpg","gif"];
+    str_replace($image_list, "", $upfile, $image_count);
+    if($image_count !== 0){
+      echo '<div class="message-body">'.'<div class="message-file"><a href="upload/'.$upfile.'" target="_blank"><img src="upload/'.$upfile.'"></a></div>'.$body.'</div>';
+    } else {
+      echo '<div class="message-body">'.'<div class="message-file"><span>'.$upfile.'</span></span><a href="upload/'.$upfile.'" target="_blank">ダウンロード</a></div>'.$body.'</div>';
+    }
+  }
 }
 ?>
             </div>
@@ -209,16 +321,16 @@ if(!empty($subject)){
         <img src="static/icons/png/outline_edit_white_24dp.png" alt="">
       </div>
       <div id="postForm" class="post-form bottom-down">
-        <form action="">
+        <form action="" method="POST" enctype="multipart/form-data">
           <div class="post-form-wrap">
             <div class="post-form-bar">
               <input type="hidden" name="mode" value="send">
               <input type="hidden" name="target" value="<?= $targetId ?>">
-              <div class="post-form-bar-items"><input class="send-files" type="file"></div>
+              <div class="post-form-bar-items"><input class="send-files" name="messageFile" type="file"></div>
               <div class="post-form-bar-items"><button class="send-button">送信</button></div>
             </div>
             <div class="post-form-body">
-              <textarea name="" id="" placeholder="メッセージ入力"></textarea>
+              <textarea name="messageBody" id="" placeholder="メッセージ入力"></textarea>
             </div>
           </div>
         </form>

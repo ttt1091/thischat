@@ -150,6 +150,12 @@
   padding-bottom: 30vh;
 }
 
+@media all and (max-width: 375px) {
+  .chat-body {
+    padding-bottom: 300px;
+  }
+}
+
 .post-form {
   padding: 8px;
   width: 100%;
@@ -433,6 +439,14 @@
   50% {
     opacity: 0.3;
   }
+}
+
+.message-file a {
+  display: block;
+}
+
+.message-file a img {
+  width: 100px;
 }
 
 /*************************
