@@ -17,6 +17,7 @@ function h($str){
 }
 
 session_start();
+session_regenerate_id();
 if(isset($_GET['myid'])){
   setcookie('theChatYouID', $_GET['myid'], time()+43200);
 }

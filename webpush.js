@@ -1,9 +1,9 @@
 /**
  * サービスワーカーの登録
- */
- self.addEventListener('load', async () => {
+*/
+self.addEventListener('load', async () => {
   if ('serviceWorker' in navigator) {
-      window.sw = await navigator.serviceWorker.register('./sw.js', {scope: '/'});
+      window.sw = await navigator.serviceWorker.register('./sw.js', {scope: '/thechat/'});
   }
 });
 
