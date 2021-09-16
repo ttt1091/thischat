@@ -4,6 +4,7 @@
 }
 
 * {
+  font-family: KosugiMaru;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -52,7 +53,7 @@
   z-index: 1031;
 }
 
-@media all and (min-width: 768px) and (max-width: 991px) {
+@media all and (min-width: 769px) and (max-width: 1089px) {
   .btn-991 {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
@@ -63,6 +64,9 @@
   }
   .right-btn {
     border-radius: 0.3rem !important;
+  }
+  button[data-btn="rightbtn"] {
+    display: block !important;
   }
   .right-col {
     position: fixed;
@@ -76,7 +80,7 @@
   }
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 768px) {
   .btn-991 {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
@@ -94,6 +98,7 @@
   }
   .right-col {
     position: fixed;
+    top: 0;
     right: -300px;
     height: calc(100vh);
     z-index: 1032;
@@ -125,7 +130,8 @@
   display: flex;
   margin: 8px 0px;
   border: solid 1px #aaf;
-  background-color: #eef;
+  background-color: #24F;
+  color: #FFF;
   border-radius: 4px;
   padding: 0px 8px;
   -webkit-box-pack: justify;
@@ -194,7 +200,7 @@
           justify-content: flex-end;
 }
 
-@media all and (max-width: 375px) {
+@media all and (max-width: 414px) {
   .post-form-bar {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -540,6 +546,29 @@
 
 .right-menu li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.right-menu-panel {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.right-menu-panel li {
+  margin: 0;
+  list-style: none;
+  width: calc(100% / 3);
+}
+
+.right-menu-panel li a {
+  display: block;
+}
+
+.right-menu-panel li a img {
+  width: 100%;
 }
 
 /*************************

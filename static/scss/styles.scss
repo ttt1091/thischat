@@ -4,6 +4,7 @@
 }
 
 * {
+  font-family: KosugiMaru;
   box-sizing: border-box;
 }
 .left-col {
@@ -39,7 +40,7 @@
   z-index: 1031;
 }
 
-@media all and (min-width: 768px) and (max-width: 991px) {
+@media all and (min-width: 769px) and (max-width: 1089px) {
   .btn-991 {
     display: inline-flex;
   }
@@ -48,6 +49,9 @@
   }
   .right-btn {
     border-radius: 0.3rem !important;
+  }
+  button[data-btn="rightbtn"] {
+    display: block!important;
   }
   .right-col {
     position: fixed;
@@ -60,7 +64,7 @@
     display: none;
   }
 }
-@media all and (max-width: 767px) {
+@media all and (max-width: 768px) {
   .btn-991 {
     display: inline-flex;
   }
@@ -76,6 +80,7 @@
   }
   .right-col {
     position: fixed;
+    top: 0;
     right: -300px;
     height: calc(100vh);
     z-index: 1032;
@@ -103,7 +108,8 @@
   display: flex;
   margin: 8px 0px;
   border: solid 1px #aaf;
-  background-color: #eef;
+  background-color: #24F;
+  color: #FFF;
   border-radius: 4px;
   padding: 0px 8px;
   justify-content: space-between;
@@ -149,7 +155,7 @@
   padding: 8px;
   display: flex;
   justify-content: flex-end;
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 414px) {
     flex-direction: column;
     .post-form-bar-items{
       margin: 8px;
@@ -399,6 +405,22 @@ $send-message-color: #D4F0FF;
       border-radius: 8px;
       &:hover {
         background-color: rgba($color: #000000, $alpha: 0.1);
+      }
+    }
+  }
+}
+.right-menu-panel{
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  li{
+    margin: 0;
+    list-style: none;
+    width: calc(100% / 3);
+    a{
+      display: block;
+      img{
+        width: 100%;
       }
     }
   }

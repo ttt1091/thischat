@@ -24,6 +24,12 @@
               <li><a href="">即時チャット履歴削除</a></li>
               <li><a href="<?= $rootWebPath . 'login' ?>">ログインフォームへ</a></li>
             </ul>
+            <ul class="right-menu-panel">
+              <li><a href=""><img src="static/images/panels/svg/panels-job.svg" alt=""></a></li>
+              <li><a href=""><img src="static/images/panels/svg/panels-logout.svg" alt=""></a></li>
+              <li><a href=""><img src="static/images/panels/svg/panels-support.svg" alt=""></a></li>
+              <li><a href=""><img src="static/images/panels/svg/panels-delete.svg" alt=""></a></li>
+            </ul>
           </div>
 
           <div class="right-items">

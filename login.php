@@ -37,9 +37,12 @@
             <input type="password" class="form-control" name="loginpass" value="">
           </div>
           <div class="mb-3 d-grid gap-2">
-            <button type="submit" class="btn btn-primary" name="login" value="go">ログイン</button>
+            <button type="submit" class="btn btn-original-blue" name="login" value="go">ログイン</button>
           </div>
         </form>
+        <div class="mb-3 d-grid gap-2">
+          <a href="/thechat/thechat">新規登録</a>
+        </div>
       </div>
     </div>
   </div>

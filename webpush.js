@@ -72,3 +72,17 @@ function urlB64ToUint8Array (base64String) {
   }
   return outputArray;
 }
+
+
+async function testPush() {
+    $.ajax({
+        type: "POST",
+        url: "techacademy.php",
+        data: { "id" : id },
+        dataType : "json"
+      }).done(function(data){
+        $("#return").append('<p>'+data.id+' : '+data.school+' : '+data.skill+'</p>');
+      }).fail(function(XMLHttpRequest, status, e){
+        alert(e);
+      });
+}

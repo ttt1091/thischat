@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors', "On");
 
 $rootPath = '/var/www/html/thechat/';
 $rootWebPath = '/thechat/';
@@ -18,6 +19,7 @@ function h($str){
 
 session_start();
 session_regenerate_id();
-if(isset($_GET['myid'])){
+if(isset($_GET['myid']))
+{
   setcookie('theChatYouID', $_GET['myid'], time()+43200);
 }

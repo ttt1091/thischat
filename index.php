@@ -5,6 +5,8 @@
 <html lang="ja">
 <head>
 <?php include($rootPath.'parts/head.php'); ?>
+<link rel="apple-touch-icon" href="static/favicon/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="theChat">
 </head>
 <body style="padding-top:56px;">
 
