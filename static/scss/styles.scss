@@ -359,8 +359,11 @@ $send-message-color: #D4F0FF;
   position: sticky;
   top: 0;
   background-color: #f2f2f2;
-  padding: 8px;
+  padding: 14px 8px 14px 8px;
   margin: 0;
+  margin-bottom: 8px;
+  box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 99;
 }
 .right-info {
   color: #888;
