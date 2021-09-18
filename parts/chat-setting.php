@@ -4,6 +4,12 @@ ini_set( 'display_errors', 1 );
 //  一時設定
 //////////////////////////////////////////
 
+
+
+if(!isset($_COOKIE['theChatYouID'])){
+  header('Location: /thechat/login');
+}
+
 $myId = intval($_COOKIE['theChatYouID']);
 $my_profiles = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :myid");
 $my_profiles->execute(

@@ -10,9 +10,9 @@ const PRIVATE_KEY = 'WT31k_u2E011Wbwqr0GtvdBa8v7lmn9kAplz4d4p4s0';
 
 // push通知認証用のデータ
 $subscription = Subscription::create([
-    'endpoint' => 'https://fcm.googleapis.com/fcm/send/f4QxqG6qZLE:APA91bFmesaq4LgqkCkz4xTycVHkOJwyS5EFaah-8S_IQtYgTcHWQcZbstn3tKtNJNW-X9zGb-BwsVOfiMPd55xB2hp34xJz2O2TByRoUDSTFxBCSJqpb3FlTaooeZ4T6_7QssH-Y1Sl',
-    'publicKey' => 'BPOGbqDp3KBVtal7twxmHde0RDt3WrBuYxAG6kiATo9TK3WPVijlJtDm5rTT11o6MYNpCdHAn7y1JEN++iA/2ik=',
-    'authToken' => '2w9Cr5TAZsTerkDYx1oRoA==',
+    'endpoint' => 'https://fcm.googleapis.com/fcm/send/dHE37N_3SSM:APA91bE1rAQKnVo-eXMmhQMzF0lef6d04JinE4ob3KUhfzlrD-G1bb-MNPQZhT4MY3K2g8AHBi6pSeaTg_p00qsRwDSMpCuWC7EVblczWNMvlwnvpoD4D3bqTkfOHeGblJX0BXajUzBO',
+    'publicKey' => 'BKvlcQl6Ap4uOhakOri3mkdTuscZ7BVUrXYT44Iigp3Eo4Omn3UKUQJY3yTs5xFZ4VOy5+UmCnLnmyQIDucNdy8=',
+    'authToken' => 'B51cDbEjr/MPzub+Htua5w==',
 ]);
 
 // ブラウザに認証させる

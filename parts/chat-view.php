@@ -31,6 +31,7 @@
       $send = $messages['send'];
       $body = nl2br($messages['body']);
       $openTime = $messages['opened_dt'];
+      $send_dt = $messages['sended_dt'];
       $messageId = $messages['id'];
       if (!empty($messages['files'])) {
         $upfile = $messages['files'];
@@ -45,7 +46,7 @@
           <div class="chat-items-right send-message">
             <div class="chat-items-top">
               <div class="chat-send-name"><?= $myName ?></div>
-              <div class="chat-send-time">2021/07/25 12:32</div>
+              <div class="chat-send-time"><?= $send_dt ?></div>
             </div>
             <div class="chat-items-body">
               <?php
@@ -92,7 +93,7 @@
             <div class="chat-items-right unread-mail">
               <div class="chat-items-top">
                 <div class="chat-send-name"><?= $mname ?></div>
-                <div class="chat-send-time">2021/07/25 12:32</div>
+                <div class="chat-send-time"><?= $send_dt ?></div>
               </div>
               <div class="chat-items-body">
                 <div class="unread-alert">
@@ -115,7 +116,7 @@
             <div class="chat-items-right">
               <div class="chat-items-top">
                 <div class="chat-send-name"><?= $mname ?></div>
-                <div class="chat-send-time">2021/07/25 12:32</div>
+                <div class="chat-send-time"><?= $send_dt ?></div>
               </div>
               <div class="chat-items-body">
                 <?php

@@ -2,7 +2,35 @@
 <?php include('/var/www/html/thechat/setting/pdo.php'); ?>
 <?php
   if(isset($_POST['login'])){
-    header('Location: /thechat/');
+    $loginId = $_POST['loginid'];
+    $loginPass = $_POST['loginpass'];
+
+    $loginSet = $dbh->prepare("SELECT * FROM `managers` WHERE `login` = :loginid AND `password` = :loginpass");
+    $loginSet->execute(
+      [
+        ':loginid' => $loginId,
+        ':loginpass' => $loginPass,
+      ]
+    );
+    $loginSets = $loginSet->fetch(PDO::FETCH_ASSOC);
+
+    $loginCheck = $dbh->prepare("SELECT count(id) AS `login_check` FROM `managers` WHERE `login` = :loginid AND `password` = :loginpass");
+    $loginCheck->execute(
+      [
+        ':loginid' => $loginId,
+        ':loginpass' => $loginPass,
+      ]
+    );
+    
+    $loginChecks = $loginCheck->fetch(PDO::FETCH_ASSOC);
+    if(!empty($loginChecks['login_check'])){
+      setcookie('theChatYouID', $loginSets['id'], time()+43200);
+      header('Location: /thechat/');
+    } else {
+      header('Location: /thechat/login');
+    }
+
+    $dbh=null;
   }
 ?>
 <!DOCTYPE html>
