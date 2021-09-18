@@ -15,16 +15,27 @@
     $loginSets = $loginSet->fetch(PDO::FETCH_ASSOC);
 
     $loginCheck = $dbh->prepare("SELECT count(id) AS `login_check` FROM `managers` WHERE `login` = :loginid AND `password` = :loginpass");
-    $loginCheck->execute(
-      [
-        ':loginid' => $loginId,
-        ':loginpass' => $loginPass,
-      ]
-    );
-    
+    $loginCheck->execute([
+      ':loginid' => $loginId,
+      ':loginpass' => $loginPass,
+    ]);
+
     $loginChecks = $loginCheck->fetch(PDO::FETCH_ASSOC);
     if(!empty($loginChecks['login_check'])){
       setcookie('theChatYouID', $loginSets['id'], time()+43200);
+      setcookie('key', $loginSets['user_key'], time()+43200);
+      $now = date('Y-m-d H:i:s');
+      $ip = $_SERVER["REMOTE_ADDR"];
+      $ip = ip2long($ip);
+      $set_read_time = $dbh->prepare("UPDATE `managers` SET `ip2long` = :ipkey, online = :onlinekey, lasted_dt = :now WHERE `managers`.`id` = :uid");
+      $set_read_time->execute(
+        [
+          ':uid' => $loginSets['id'],
+          ':ipkey' => $ip,
+          ':onlinekey' => makeRandStr(13),
+          ':now' => $now
+        ]
+      );
       header('Location: /thechat/');
     } else {
       header('Location: /thechat/login');
