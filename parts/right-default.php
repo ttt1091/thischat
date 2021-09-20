@@ -22,6 +22,9 @@
               <li><a href="">登録情報変更</a></li>
               <li><a href="">新規ユーザー登録</a></li>
               <li><a href="">即時チャット履歴削除</a></li>
+              <li>
+                <input type="button" id="push" onclick="return push()" value="Click!!">
+              </li>
               <li><a href="<?= $rootWebPath . 'login' ?>">ログインフォームへ</a></li>
               <li><a href="<?= $rootWebPath . 'logout' ?>">ログアウト</a></li>
             </ul>
@@ -39,3 +42,21 @@
 
         </div>
       </div>
+
+      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+<script>
+ function push(){
+  Push.create("通知", 
+   {
+    body: "チャットが来たよ",
+    icon: 'apple-touch-icon.png',
+    timeout: 8000,
+    onClick: function () {
+      window.focus(); 
+      this.close();
+      location.href = 'https://ubuntu-2nd/thechat/';
+    }
+  })
+}
+</script>

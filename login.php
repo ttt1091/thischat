@@ -85,5 +85,6 @@
       </div>
     </div>
   </div>
+  <?= $_SERVER['SCRIPT_NAME'] ?>
 </body>
 </html>

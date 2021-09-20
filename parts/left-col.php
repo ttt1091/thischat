@@ -2,7 +2,7 @@
   <div class="chat-list-ttl">チャットルーム</div>
   <div class="chat-list-items"><a href="">AllChat</a></div>
   <?php
-  $manager_que = $dbh->query("SELECT * FROM `managers` WHERE `status` = '1' AND `group` = 'site01'");
+  $manager_que = $dbh->query("SELECT * FROM `managers` WHERE `status` = '1' AND `site_group` = 'site01'");
   while ($managers = $manager_que->fetch(PDO::FETCH_ASSOC)) {
     // UnRead Check
     if ($managers['id'] != $myId) {
