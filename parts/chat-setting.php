@@ -10,15 +10,6 @@ if(!isset($_COOKIE['theChatYouID'])){
   header('Location: /thechat/login');
 }
 
-$myId = intval($_COOKIE['theChatYouID']);
-$my_profiles = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :myid");
-$my_profiles->execute(
-  [
-    'myid' => $myId,
-  ]
-);
-$myProf = $my_profiles->fetch(PDO::FETCH_ASSOC);
-$myName = $myProf['name'];
 
 if(isset($_POST['mode'])){
   if($_POST['mode']=='read'){

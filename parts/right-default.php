@@ -29,10 +29,10 @@
               <li><a href="<?= $rootWebPath . 'logout' ?>">ログアウト</a></li>
             </ul>
             <ul class="right-menu-panel">
-              <li><a href=""><img src="static/images/panels/svg/panels-job.svg" alt=""></a></li>
-              <li><a href="<?= $rootWebPath . 'logout' ?>"><img src="static/images/panels/svg/panels-logout.svg" alt=""></a></li>
-              <li><a href=""><img src="static/images/panels/svg/panels-support.svg" alt=""></a></li>
-              <li><a href=""><img src="static/images/panels/svg/panels-delete.svg" alt=""></a></li>
+              <li><a href="jobster/"><img src="<?= $rootWebPath ?>static/images/panels/svg/panels-job.svg" alt=""></a></li>
+              <li><a href="<?= $rootWebPath . 'logout' ?>"><img src="<?= $rootWebPath ?>static/images/panels/svg/panels-logout.svg" alt=""></a></li>
+              <li><a href=""><img src="<?= $rootWebPath ?>static/images/panels/svg/panels-support.svg" alt=""></a></li>
+              <li><a href=""><img src="<?= $rootWebPath ?>static/images/panels/svg/panels-delete.svg" alt=""></a></li>
             </ul>
           </div>
 
