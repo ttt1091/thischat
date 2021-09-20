@@ -32,14 +32,6 @@ if(isset($_POST['register'])){
       $user_key = makeRandStr(13);
       $dbh->beginTransaction();
 
-      
-      echo $userName.'<br>';
-      echo $userId.'<br>';
-      echo $userPass.'<br>';
-      echo $online.'<br>';
-      echo $user_key.'<br>';
-      echo '<br>';
-
       $user_create->bindParam( ':logins', $userId, PDO::PARAM_STR);
       $user_create->bindParam( ':names', $userName, PDO::PARAM_STR);
       $user_create->bindParam( ':pass', $userPass, PDO::PARAM_STR);
@@ -64,6 +56,22 @@ if(isset($_POST['register'])){
         ]
       );
       $loginSets = $loginSet->fetch(PDO::FETCH_ASSOC);
+
+      
+      $jobster_create = $dbh->prepare("INSERT INTO `jobster_user_settings`(
+        manager_id,name,user_mode,view_flag
+      ) VALUES (
+        :managerid,:name,:usermode,:viewflag
+      )");
+      $dbh->beginTransaction();
+      
+      $parame_one = 1;
+      $jobster_create->bindParam( ':managerid', $loginSets['id'], PDO::PARAM_INT);
+      $jobster_create->bindParam( ':name', $loginSets['name'], PDO::PARAM_STR);
+      $jobster_create->bindParam( ':usermode', $parame_one, PDO::PARAM_INT);
+      $jobster_create->bindParam( ':viewflag', $parame_one, PDO::PARAM_INT);
+      $jobster_create->execute();
+      $dbh->commit();
       
       setcookie('theChatYouID', $loginSets['id'], time()+43200);
       setcookie('key', $loginSets['user_key'], time()+43200);

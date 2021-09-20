@@ -430,6 +430,51 @@ $send-message-color: #D4F0FF;
   }
 }
 
+
+
+
+
+
+/*************************
+*  JobSter
+*************************/
+
+.jobster-main-items{
+  margin: 8px;
+  margin-bottom: 32px;
+  overflow: auto;
+  h2{
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+.jobster-main-table-wrap{
+  width: 100%;
+  overflow: auto;
+}
+.jobster-main-table{
+  min-width: 635px;
+  width: 100%;
+  max-width: 635px;
+  font-size: .8rem;
+}
+.jobster-main-table th, .jobster-main-table td{
+  border: solid 1px #444;
+  padding: 4px;
+  background-color: #FFF;
+}
+.jobster-col-times{
+  text-align: center;
+  width: 32px;
+}
+.jobster-col-working{
+  background-color: #E16B8C!important;
+}
+.jobster-col-work-time{
+  text-align: center;
+  width: 60px;
+}
+
 /*************************
 *  BootstrapSettings
 *************************/

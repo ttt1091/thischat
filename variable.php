@@ -24,16 +24,19 @@ if(isset($_GET['myid']))
   setcookie('theChatYouID', $_GET['myid'], time()+43200);
 }
 
+if($_SERVER['SCRIPT_NAME']=='//thechat/login.php'||$_SERVER['SCRIPT_NAME']=='//thechat/thechat.php'){}else{
 
-include('/var/www/html/thechat/setting/pdo.php');
-$myId = intval($_COOKIE['theChatYouID']);
-$my_profiles = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :myid");
-$my_profiles->execute(
-  [
-    'myid' => $myId,
-  ]
-);
-$myProf = $my_profiles->fetch(PDO::FETCH_ASSOC);
-$myName = $myProf['name'];
+  include('/var/www/html/thechat/setting/pdo.php');
+  $myId = intval($_COOKIE['theChatYouID']);
+  $my_profiles = $dbh->prepare("SELECT * FROM `managers` WHERE `status` = '1' AND `id` = :myid");
+  $my_profiles->execute(
+    [
+      'myid' => $myId,
+    ]
+  );
+  $myProf = $my_profiles->fetch(PDO::FETCH_ASSOC);
+  $myName = $myProf['name'];
 
-$dbh=null;
+  $dbh=null;
+
+}
