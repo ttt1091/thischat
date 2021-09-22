@@ -9,7 +9,7 @@
       $unread_que = $dbh->prepare("SELECT COUNT(*) AS `unread_count` FROM `messages` WHERE `status` = '1' 
       AND `receive` = :receiveid  
       AND `send` = :sendid 
-      AND `opened_dt` LIKE '1900-01-01%'");
+      AND `opened_dt` LIKE '9999-12-31%'");
       $unread_que->execute([
         "receiveid" => $myId,
         "sendid" => $managers['id']

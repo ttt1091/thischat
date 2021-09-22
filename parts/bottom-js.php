@@ -1,4 +1,4 @@
-<script src="static/js/bootstrap.js"></script>
+<script src="<?= $rootWebPath ?>static/js/bootstrap.js"></script>
 <script>
 $('[data-btn="leftbtn"]').on('click',
   function () {
@@ -22,7 +22,10 @@ $('.close-mask').on('click',
 );
 
 <?php if(isset($_GET['read'])){ ?>
-  $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
+  d.promise()
+  .then(function() {
+    $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
+  });
 <?php } else { ?>
   $(".chat-body").animate({scrollTop:$('#lastPostView').offset().top}, { duration: 1000, easing: 'swing', });
 <?php } ?>

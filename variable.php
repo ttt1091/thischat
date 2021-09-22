@@ -37,6 +37,8 @@ if($_SERVER['SCRIPT_NAME']=='//thechat/login.php'||$_SERVER['SCRIPT_NAME']=='//t
   $myProf = $my_profiles->fetch(PDO::FETCH_ASSOC);
   $myName = $myProf['name'];
 
+  $delete_hour = $dbh->query("DELETE FROM `messages` WHERE (`opened_dt` < DATE_SUB(CURDATE(), INTERVAL 12 HOUR))");
+
   $dbh=null;
 
 }

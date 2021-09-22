@@ -67,7 +67,7 @@
                 if (empty($upfile)) {
                   echo '<div class="message-body">' . $body . '</div>';
                 } else {
-                  $image_list = ["png", "jpeg", "jpg", "gif"];
+                  $image_list = ["png", "jpeg", "jpg", "gif", "JPG"];
                   str_replace($image_list, "", $upfile, $image_count);
                   if ($image_count !== 0) {
                     echo '<div class="message-body">' . '<div class="message-file"><a href="upload/' . $upfile . '" target="_blank"><img src="upload/' . $upfile . '"></a></div>' . $body . '</div>';
@@ -85,7 +85,7 @@
         <?php
       } else {
         // Receive Message
-        if ($openTime == '1900-01-01 00:00:00') {
+        if ($openTime == '9999-12-31 23:59:59') {
           // unread
         ?>
           <div id="message<?= $messageId ?>" class="chat-items">
@@ -165,3 +165,6 @@
 <?php if (isset($_GET['target'])) { ?>
   <?php include($rootPath . 'parts/chat-post-form.php'); ?>
 <?php } ?>
+
+
+<?php include($rootPath . 'parts/getMessageAjax.php'); ?>

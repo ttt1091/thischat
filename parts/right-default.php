@@ -17,16 +17,14 @@
               <li><a href="<?= $rootWebPath . '?myid=1' ?>">MasterLogin</a></li>
               <li><a href="<?= $rootWebPath . '?myid=2' ?>">太郎Login</a></li>
               <li><a href="<?= $rootWebPath . '?myid=3' ?>">花子Login</a></li>
-              <li><a href="<?= $rootWebPath . 'thechat' ?>">初期設定用</a></li>
               <li><a href="javascript:allowWebPush()">WebPushを許可する</a></li>
               <li><a href="">登録情報変更</a></li>
-              <li><a href="">新規ユーザー登録</a></li>
+              <li><a href="<?= $rootWebPath . 'thechat' ?>">新規ユーザー登録</a></li>
               <li><a href="">即時チャット履歴削除</a></li>
               <li>
                 <input type="button" id="push" onclick="return push()" value="Click!!">
               </li>
               <li><a href="<?= $rootWebPath . 'login' ?>">ログインフォームへ</a></li>
-              <li><a href="<?= $rootWebPath . 'logout' ?>">ログアウト</a></li>
             </ul>
             <ul class="right-menu-panel">
               <li><a href="<?= $rootWebPath ?>"><img src="<?= $rootWebPath ?>static/images/panels/svg/panels-home.svg" alt=""></a></li>

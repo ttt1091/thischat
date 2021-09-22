@@ -1,10 +1,15 @@
 @font-face {
   font-family: "KosugiMaru";
-  src: url("static/fonts/KosugiMaru-Regular.ttf");
+  src: url("/thechat/static/fonts/KosugiMaru-Regular.ttf");
 }
+@font-face {
+  font-family: "Jomhuria";
+  src: url("/thechat/static/fonts/Jomhuria-Regular.ttf");
+}
+@import url('https://fonts.googleapis.com/css2?family=Kosugi&family=Noto+Sans+JP&display=swap');
 
 * {
-  font-family: KosugiMaru;
+  font-family: 'Noto Sans JP', sans-serif;
   box-sizing: border-box;
 }
 .left-col {
@@ -438,7 +443,10 @@ $send-message-color: #D4F0FF;
 /*************************
 *  JobSter
 *************************/
-
+.jobster-wrap{
+  background-image: url('/thechat/static/images/login/background.png');
+  padding-bottom: 50vh;
+}
 .jobster-main-items{
   margin: 8px;
   margin-bottom: 32px;
@@ -457,11 +465,15 @@ $send-message-color: #D4F0FF;
   width: 100%;
   max-width: 635px;
   font-size: .8rem;
+  border-collapse:collapse;
 }
 .jobster-main-table th, .jobster-main-table td{
   border: solid 1px #444;
   padding: 4px;
   background-color: #FFF;
+}
+.jobster-main-table td a{
+  text-decoration: none;
 }
 .jobster-col-times{
   text-align: center;
@@ -475,9 +487,88 @@ $send-message-color: #D4F0FF;
   width: 60px;
 }
 
+
+
+$jobster-left-menu-bgcolor: #333;
+.jobster-left-menu{
+  list-style: none;
+  padding: 0;
+  li{
+    padding: 8px;
+    border-bottom: solid 1px #ccc;
+    background-color: $jobster-left-menu-bgcolor;
+    &:hover{
+      background-color: lighten($jobster-left-menu-bgcolor, 15%);
+    }
+    a{
+      display: block;
+      color: #FFF;
+      text-decoration: none;
+      padding: 4px;
+      position: relative;
+      img{
+        margin-right: 4px;
+        vertical-align: bottom;
+      }
+    }
+  }
+}
+.jobster-left-menu-ttl{
+  color: #FFF;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-family: cursive;
+}
+.jobster-left-menu-ttl:hover{
+  background-color: $jobster-left-menu-bgcolor!important;
+}
+
+.menu-check-batch::after{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C73E3A;
+  width: 24px;
+  height: 24px;
+  content: '!';
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 0px;
+  border-radius: 50%;
+}
+
+.monthy-table{
+  min-width: 700px;
+  max-width: 700px;
+}
+.monthy-table-cell-name{
+  width: 100px;
+  text-align: center;
+  font-size: .7rem;
+}
+
 /*************************
 *  BootstrapSettings
 *************************/
 .row > * {
   padding: 0;
+}
+
+
+
+/*************************
+*  PartsSettings
+*************************/
+$tamago: #F9BF45;
+$wasurenagusa: #7DB9DE;
+.text-center{ text-align: center; }
+.bg-tamago{ background-color: $tamago!important; }
+.bg-wasurenagusa{ background-color: $wasurenagusa!important; }
+
+.no-certification{
+  font-style: italic;
+  background-color: lighten($wasurenagusa, 15%);
+  padding: 0px 8px;
 }

@@ -35,9 +35,14 @@ $now = date('Y/m/d');
 
 <div class="jobster-wrap">
 
-  <?php include($rootPath.'jobster/parts/toDaysWork.php'); ?>
-  <?php include($rootPath.'jobster/parts/tomorrowWork.php'); ?>
-  <?php include($rootPath.'jobster/parts/toMonth.php'); ?>
+<div>
+  <h2>シフト登録</h2>
+  <div>
+    <div>
+      <div>2021/09/01</div>
+    </div>
+  </div>
+</div>
 
 </div>
 

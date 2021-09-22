@@ -1,10 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Kosugi&family=Noto+Sans+JP&display=swap");
 @font-face {
   font-family: "KosugiMaru";
-  src: url("static/fonts/KosugiMaru-Regular.ttf");
+  src: url("/thechat/static/fonts/KosugiMaru-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Jomhuria";
+  src: url("/thechat/static/fonts/Jomhuria-Regular.ttf");
 }
 
 * {
-  font-family: KosugiMaru;
+  font-family: 'Noto Sans JP', sans-serif;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -579,6 +585,11 @@
 /*************************
 *  JobSter
 *************************/
+.jobster-wrap {
+  background-image: url("/thechat/static/images/login/background.png");
+  padding-bottom: 50vh;
+}
+
 .jobster-main-items {
   margin: 8px;
   margin-bottom: 32px;
@@ -600,12 +611,17 @@
   width: 100%;
   max-width: 635px;
   font-size: .8rem;
+  border-collapse: collapse;
 }
 
 .jobster-main-table th, .jobster-main-table td {
   border: solid 1px #444;
   padding: 4px;
   background-color: #FFF;
+}
+
+.jobster-main-table td a {
+  text-decoration: none;
 }
 
 .jobster-col-times {
@@ -622,9 +638,106 @@
   width: 60px;
 }
 
+.jobster-left-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.jobster-left-menu li {
+  padding: 8px;
+  border-bottom: solid 1px #ccc;
+  background-color: #333;
+}
+
+.jobster-left-menu li:hover {
+  background-color: #595959;
+}
+
+.jobster-left-menu li a {
+  display: block;
+  color: #FFF;
+  text-decoration: none;
+  padding: 4px;
+  position: relative;
+}
+
+.jobster-left-menu li a img {
+  margin-right: 4px;
+  vertical-align: bottom;
+}
+
+.jobster-left-menu-ttl {
+  color: #FFF;
+  height: 49px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.1rem;
+  font-family: cursive;
+}
+
+.jobster-left-menu-ttl:hover {
+  background-color: #333 !important;
+}
+
+.menu-check-batch::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #C73E3A;
+  width: 24px;
+  height: 24px;
+  content: '!';
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 0px;
+  border-radius: 50%;
+}
+
+.monthy-table {
+  min-width: 700px;
+  max-width: 700px;
+}
+
+.monthy-table-cell-name {
+  width: 100px;
+  text-align: center;
+  font-size: .7rem;
+}
+
 /*************************
 *  BootstrapSettings
 *************************/
 .row > * {
   padding: 0;
+}
+
+/*************************
+*  PartsSettings
+*************************/
+.text-center {
+  text-align: center;
+}
+
+.bg-tamago {
+  background-color: #F9BF45 !important;
+}
+
+.bg-wasurenagusa {
+  background-color: #7DB9DE !important;
+}
+
+.no-certification {
+  font-style: italic;
+  background-color: #badaed;
+  padding: 0px 8px;
 }
