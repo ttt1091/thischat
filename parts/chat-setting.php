@@ -155,7 +155,7 @@ if(isset($_POST['mode'])){
       // exec('php sendPush.php');
 
       // 古いメッセージ(開封後12時間経過)の強制削除
-      $dbh->query("DELETE FROM `messages` WHERE (`opened_dt` < DATE_SUB(NOW(), INTERVAL 12 HOUR))");
+      $dbh->query("DELETE FROM `messages` WHERE `opened_dt` != '9999-12-31 23:59:59' AND (`sended_dt` < DATE_SUB(NOW(), INTERVAL 12 HOUR))");
 
       $message4json = $dbh->prepare("SELECT
           `msg`.`id`,

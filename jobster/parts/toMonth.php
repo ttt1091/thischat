@@ -63,7 +63,7 @@ while ($push_mid = $working_people->fetch(PDO::FETCH_ASSOC)){
       $working_flag = 0;
     }
 ?>
-          <td class="text-center<?php if($working['working']==2){ echo ' bg-tamago'; }elseif($working['working']==='0'){ echo ' bg-wasurenagusa'; } ?>">
+          <td class="text-center<?php if(isset($working['working'])){ if($working['working']==2){ echo ' bg-tamago'; }elseif($working['working']==='0'){ echo ' bg-wasurenagusa'; } } ?>">
 <?php
   if(!empty($working['start_time'])){
     $start_time = $working['start_time'];

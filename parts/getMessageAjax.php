@@ -1,11 +1,41 @@
 <script>
-  // const getMessages = () => {
+function setLocal(){
+  $.ajax({
+    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
+    dataType: 'json',
+    data: {
+      name: ''
+    },
+    success: function(data) {
+      var datalist = data;
+      localStorage.setItem("messageListTo<?= $targetId ?>", JSON.stringify(datalist));
+    }
+  });
+}
 
-  var d = new $.Deferred();
+function getAPImessages(){
+  diff = new $.Deferred();
+  $.ajax({
+    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
+    dataType: 'json',
+    data: {
+      name: ''
+    },
+    success: function(data) {
+      let gam = data;
+      localStorage.setItem("messageListTo<?= $targetId ?>Diff", JSON.stringify(gam));
+      diff.resolve();
+    }
+  });
+}
+
+// const getMessages = () => {
+d = new $.Deferred();
+function getMessages(){
   $(function() {
     $(".chat-body").html('');
     $.ajax({
-      url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json',
+      url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
       dataType: 'json',
       data: {
         name: ''
@@ -16,6 +46,7 @@
           let myid = "<?= $myId ?>";
           let send = "<?= $send ?>";
           let imagefiles = /jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF/;
+          let body = dataArray[i].body.replace( /\r?\n/g, '<br>' );
           if (dataArray[i].send == myid) {
             // SendMessage
             if (dataArray[i].files) {
@@ -28,7 +59,7 @@
                   '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                   '</div>' +
                   '<div class="chat-items-body">' +
-                  '<div class="message-body"><div class="message-file"><a href="upload/' + dataArray[i].files + '" target="_blank"><img src="upload/' + dataArray[i].files + '"></a></div>' + dataArray[i].body + '</div>' +
+                  '<div class="message-body"><div class="message-file"><a href="upload/' + dataArray[i].files + '" target="_blank"><img src="upload/' + dataArray[i].files + '"></a></div>' + body + '</div>' +
                   '</div>' +
                   '</div>' +
                   '<div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>' +
@@ -43,7 +74,7 @@
                   '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                   '</div>' +
                   '<div class="chat-items-body">' +
-                  '<div class="message-body"><div class="message-file"><span>' + dataArray[i].files + '</span></span><a href="upload/' + dataArray[i].files + '" target="_blank">ダウンロード</a></div>' + dataArray[i].body + '</div>' +
+                  '<div class="message-body"><div class="message-file"><span>' + dataArray[i].files + '</span></span><a href="upload/' + dataArray[i].files + '" target="_blank">ダウンロード</a></div>' + body + '</div>' +
                   '</div>' +
                   '</div>' +
                   '<div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>' +
@@ -59,7 +90,7 @@
                 '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                 '</div>' +
                 '<div class="chat-items-body">' +
-                '<div class="message-body">' + dataArray[i].body + '</div>' +
+                '<div class="message-body">' + body + '</div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="chat-items-thumb"><img src="static/images/dummy-001.jpg" alt=""></div>' +
@@ -102,7 +133,7 @@
                     '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                     '</div>' +
                     '<div class="chat-items-body">' +
-                    '<div class="message-body"><div class="message-file"><a href="upload/' + dataArray[i].files + '" target="_blank"><img src="upload/' + dataArray[i].files + '"></a></div>' + dataArray[i].body + '</div>' +
+                    '<div class="message-body"><div class="message-file"><a href="upload/' + dataArray[i].files + '" target="_blank"><img src="upload/' + dataArray[i].files + '"></a></div>' + body + '</div>' +
                     '</div>' +
                     '</div>' +
                     '</div>'
@@ -117,7 +148,7 @@
                     '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                     '</div>' +
                     '<div class="chat-items-body">' +
-                    '<div class="message-body"><div class="message-file"><span>' + dataArray[i].files + '</span></span><a href="upload/' + dataArray[i].files + '" target="_blank">ダウンロード</a></div>' + dataArray[i].body + '</div>' +
+                    '<div class="message-body"><div class="message-file"><span>' + dataArray[i].files + '</span></span><a href="upload/' + dataArray[i].files + '" target="_blank">ダウンロード</a></div>' + body + '</div>' +
                     '</div>' +
                     '</div>' +
                     '</div>'
@@ -133,7 +164,7 @@
                   '<div class="chat-send-time">' + dataArray[i].sended_dt + '</div>' +
                   '</div>' +
                   '<div class="chat-items-body">' +
-                  '<div class="message-body">' + dataArray[i].body + '</div>' +
+                  '<div class="message-body">' + body + '</div>' +
                   '</div>' +
                   '</div>' +
                   '</div>'
@@ -143,10 +174,47 @@
           }
         });
         d.resolve();
+        
+  d.promise()
+  .then(function() {
+        $(".chat-body").append('<div id="lastPostView"></div>');
+  });
+      if($('.chat-body').scrollTop()=='0'){
+        $('.chat-body').scrollTop(99999);
+      }
       }
     });
   });
-  // }
+}
+// }
 
-  //setInterval(getMessages, 5000);
+$(function(){
+  getMessages();
+  setLocal();
+});
+function diffMessage() {
+  getAPImessages();
+  diff.promise()
+  .then(function() {
+    let getLocalMessageJson = localStorage.getItem("messageListTo<?= $targetId ?>");
+    let getLocalMessageJsonDiff = localStorage.getItem("messageListTo<?= $targetId ?>Diff");
+    
+    if(getLocalMessageJson==getLocalMessageJsonDiff){
+      console.log('同じ');
+      console.log($('.chat-body').scrollTop());
+    } else {
+      console.log('違う');
+      setLocal();
+      getMessages();
+      alert('新着メッセージあり');
+      if($('.chat-body').scrollTop()=='0'){
+        console.log($('.chat-body').scrollTop());
+        $('.chat-body').scrollTop(99999);
+      }
+    }
+  });
+}
+
+setInterval(diffMessage, 3000);
+
 </script>

@@ -67,7 +67,7 @@
                 if (empty($upfile)) {
                   echo '<div class="message-body">' . $body . '</div>';
                 } else {
-                  $image_list = ["png", "jpeg", "jpg", "gif", "JPG"];
+                  $image_list = ["png", "jpeg", "jpg", "gif"];
                   str_replace($image_list, "", $upfile, $image_count);
                   if ($image_count !== 0) {
                     echo '<div class="message-body">' . '<div class="message-file"><a href="upload/' . $upfile . '" target="_blank"><img src="upload/' . $upfile . '"></a></div>' . $body . '</div>';

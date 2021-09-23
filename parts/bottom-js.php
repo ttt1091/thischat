@@ -1,3 +1,4 @@
+<div id="bottoms"></div>
 <script src="<?= $rootWebPath ?>static/js/bootstrap.js"></script>
 <script>
 $('[data-btn="leftbtn"]').on('click',
@@ -21,13 +22,21 @@ $('.close-mask').on('click',
   }
 );
 
+
+<?php if($_SERVER['SCRIPT_NAME']=='//thechat/login.php'||$_SERVER['SCRIPT_NAME']=='//thechat/thechat.php'||$_SERVER['SCRIPT_NAME']=='/thechat/jobster/index.php'){}else{ ?>
+
 <?php if(isset($_GET['read'])){ ?>
-  d.promise()
-  .then(function() {
-    $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
-  });
+//  d.promise()
+//  .then(function() {
+//    $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
+//  });
+$(function(){
+	setTimeout(function(){
+  $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
+},2000);
+});
 <?php } else { ?>
-  $(".chat-body").animate({scrollTop:$('#lastPostView').offset().top}, { duration: 1000, easing: 'swing', });
+  $('.chat-body').scrollTop(99999);
 <?php } ?>
 
 $('#bottomUpButton').on('click',
@@ -36,4 +45,5 @@ $('#bottomUpButton').on('click',
     $('#postForm').toggleClass("bottom-down");
   }
 );
+<?php } ?>
 </script>
