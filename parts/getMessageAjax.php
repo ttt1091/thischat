@@ -199,13 +199,19 @@ function diffMessage() {
     let getLocalMessageJson = localStorage.getItem("messageListTo<?= $targetId ?>");
     let getLocalMessageJsonDiff = localStorage.getItem("messageListTo<?= $targetId ?>Diff");
     
-    if(getLocalMessageJson==getLocalMessageJsonDiff){
+    let getL = JSON.parse(getLocalMessageJson);
+    let getLD = JSON.parse(getLocalMessageJsonDiff);
+
+    if(getL.length==getLD.length){
       console.log('同じ');
-      console.log($('.chat-body').scrollTop());
+      // console.log($('.chat-body').scrollTop());
     } else {
       console.log('違う');
+      console.log('getLocalMessageJson : '+getL.length);
+      console.log('getLocalMessageJsonDiff : '+getLD.length);
       setLocal();
       getMessages();
+      push();
       alert('新着メッセージあり');
       if($('.chat-body').scrollTop()=='0'){
         console.log($('.chat-body').scrollTop());
