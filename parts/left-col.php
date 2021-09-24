@@ -1,6 +1,5 @@
 <div class="chat-list">
   <div class="chat-list-ttl">チャットルーム</div>
-  <div class="chat-list-items"><a href="">AllChat</a></div>
   <?php
   $manager_que = $dbh->query("SELECT * FROM `managers` WHERE `status` = '1' AND `site_group` = 'site01'");
   while ($managers = $manager_que->fetch(PDO::FETCH_ASSOC)) {
@@ -20,11 +19,14 @@
       } else {
         $unread_count = $unread['unread_count'];
       }
-    } else {
+    ?>
+
+<div class="chat-list-items"><a href="/thechat/?target=<?= $managers['id']; ?>"><?= $managers['name']; ?><?php if (empty($unread_count)) {
+    } else { ?><span class="unread-point"><?= $unread_count ?></span><?php } ?></a></div>
+
+<?php } else {
       $unread_count = '';
     }
   ?>
-    <div class="chat-list-items"><a href="/thechat/?target=<?= $managers['id']; ?>"><?= $managers['name']; ?><?php if (empty($unread_count)) {
-                                                                                                              } else { ?><span class="unread-point"><?= $unread_count ?></span><?php } ?></a></div>
   <?php } ?>
 </div>

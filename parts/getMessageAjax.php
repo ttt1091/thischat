@@ -212,7 +212,7 @@ function diffMessage() {
       setLocal();
       getMessages();
       push();
-      alert('新着メッセージあり');
+      // alert('新着メッセージあり');
       if($('.chat-body').scrollTop()=='0'){
         console.log($('.chat-body').scrollTop());
         $('.chat-body').scrollTop(99999);
