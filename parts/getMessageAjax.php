@@ -39,7 +39,7 @@ function getAPImessages(){
 ?>
   diff = new $.Deferred();
   $.ajax({
-    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $lmvs ?>.json?rand=<?= rand() ?>',
+    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $lmvs ?>.json',
     dataType: 'json',
     data: {
       name: ''
@@ -64,7 +64,7 @@ function getMessages(){
   $(function() {
     $(".chat-body").html('');
     $.ajax({
-      url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
+      url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json',
       dataType: 'json',
       data: {
         name: ''

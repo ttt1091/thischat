@@ -36,6 +36,85 @@
           ':now' => $now
         ]
       );
+
+      $dbh->query("DELETE FROM `messages` WHERE `opened_dt` != '9999-12-31 23:59:59' AND (`sended_dt` < DATE_SUB(NOW(), INTERVAL 12 HOUR))");
+      // Json File Touch
+      $loop_manager = $dbh->prepare("SELECT * FROM `managers` WHERE `id` != :myid AND `status` = '1'");
+      $loop_manager->execute([
+        'myid' => $loginSets['id']
+      ]);
+      while ($lmv = $loop_manager->fetch(PDO::FETCH_ASSOC)) {
+        $my2you4json = [];
+        $you2my4json = [];
+
+        $message4json = $dbh->prepare("SELECT
+          `msg`.`id`,
+          `msg`.`send`,
+          `mng`.`name` AS `sendname`,
+          `msg`.`receive`,
+          `mng2`.`name` AS `receivename`,
+          `msg`.`subject`,
+          `msg`.`body`,
+          `msg`.`files`,
+          `msg`.`status`,
+          `msg`.`mail_key`,
+          `msg`.`opened_dt`,
+          `msg`.`sended_dt`,
+          `msg`.`changed_dt`,
+          `msg`.`created_dt`
+        FROM `messages` AS `msg` INNER JOIN `managers` AS `mng` ON `msg`.`send` = `mng`.`id` INNER JOIN `managers` AS `mng2` ON `msg`.`receive` = `mng2`.`id`
+        WHERE
+          `msg`.`status` = 1 AND
+          (`msg`.`send` = :mid AND `msg`.`receive` = :myid) OR
+          (`msg`.`send` = :myid AND `msg`.`receive` = :mid)");
+        $message4json->execute(
+          [
+            'mid' => $lmv['id'],
+            'myid' => $loginSets['id']
+          ]
+        );
+        while ($m4j = $message4json->fetch(PDO::FETCH_ASSOC)) {
+          $my2you4json[] = [
+            "mail_id" => $m4j['id'],
+            "send" => $m4j['send'],
+            "sendname" => $m4j['sendname'],
+            "receive" => $m4j['receive'],
+            "receivename" => $m4j['receivename'],
+            "subject" => $m4j['subject'],
+            "body" => $m4j['body'],
+            "files" => $m4j['files'],
+            "status" => $m4j['status'],
+            "mail_key" => $m4j['mail_key'],
+            "opened_dt" => $m4j['opened_dt'],
+            "sended_dt" => $m4j['sended_dt'],
+            "changed_dt" => $m4j['changed_dt'],
+            "created_dt" => $m4j['created_dt']
+          ];
+          $you2my4json[] = [
+            "mail_id" => $m4j['id'],
+            "send" => $m4j['send'],
+            "sendname" => $m4j['sendname'],
+            "receive" => $m4j['receive'],
+            "receivename" => $m4j['receivename'],
+            "receive" => $m4j['subject'],
+            "body" => $m4j['body'],
+            "files" => $m4j['files'],
+            "status" => $m4j['status'],
+            "mail_key" => $m4j['mail_key'],
+            "opened_dt" => $m4j['opened_dt'],
+            "sended_dt" => $m4j['sended_dt'],
+            "changed_dt" => $m4j['changed_dt'],
+            "created_dt" => $m4j['created_dt']
+          ];
+        }
+
+        exec('mkdir /var/www/html/thechat/json/messages/users/'.strval($loginSets['id']));
+        exec('mkdir /var/www/html/thechat/json/messages/users/'.strval($lmv['id']));
+        exec('touch /var/www/html/thechat/json/messages/users/'.strval($loginSets['id']).'/message-'.strval($lmv['id']).'.json');
+        exec('touch /var/www/html/thechat/json/messages/users/'.strval($lmv['id']).'/message-'.strval($loginSets['id']).'.json');
+        file_put_contents('/var/www/html/thechat/json/messages/users/'.strval($loginSets['id']).'/message-'.strval($lmv['id']).'.json', json_encode($my2you4json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        file_put_contents('/var/www/html/thechat/json/messages/users/'.strval($lmv['id']).'/message-'.strval($loginSets['id']).'.json', json_encode($you2my4json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+      }
       header('Location: /thechat/');
     } else {
       header('Location: /thechat/login');
