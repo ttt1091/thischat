@@ -704,14 +704,135 @@
 }
 
 .monthy-table {
-  min-width: 700px;
-  max-width: 700px;
+  min-width: 790px;
+  max-width: 100%;
 }
 
 .monthy-table-cell-name {
   width: 100px;
   text-align: center;
   font-size: .7rem;
+}
+
+.jobster-to-month-th-min {
+  width: 37px;
+}
+
+.jobster-work-register {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.jobster-work-register .jobster-work-register-this, .jobster-work-register .jobster-work-register-next {
+  width: 100%;
+}
+
+@media screen and (min-width: 1700px) {
+  .jobster-work-register .jobster-work-register-this, .jobster-work-register .jobster-work-register-next {
+    width: 50%;
+  }
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap {
+  margin: 8px;
+  padding: 8px;
+  background-color: #efefef;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl {
+  background-color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dt {
+  width: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd {
+  margin: 0;
+  width: 150px;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl .official-message {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  border-left: none;
+  border-right: none;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd:last-child {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dt, .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd {
+  border-color: #CCC;
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  padding: 4px;
+}
+
+.jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl:last-child dt, .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl:last-child dd {
+  border-bottom: solid 1px #CCC;
+}
+
+@media screen and (min-width: 1300px) {
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl {
+    display: block;
+    width: calc(100% / 7);
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dt, .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd {
+    border-color: #CCC;
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+    border-right: none;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dt {
+    border-bottom: none;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd {
+    height: 60px;
+    margin: 0;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl .official-message {
+    height: 30px;
+    border-bottom: none;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl .work-register {
+    width: 100%;
+    margin: 8px;
+  }
+  .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl:last-child dt, .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl:last-child dd {
+    border-right: solid 1px #CCC;
+  }
+}
+
+.background-disable {
+  background-color: #EDEDED !important;
 }
 
 /*************************

@@ -1,5 +1,5 @@
 <div class="jobster-main-items">
-    <h2>ToDay</h2>
+    <h2><img src="<?= $rootWebPath ?>static/icons/svg/calendar.svg" style="height: 1.2rem;"> ToDay</h2>
     <div class="jobster-main-table-wrap">
       <table class="jobster-main-table">
         <thead>

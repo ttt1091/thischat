@@ -47,3 +47,5 @@ $('#bottomUpButton').on('click',
 );
 <?php } ?>
 </script>
+
+<?php include($rootPath . 'parts/getMessageAjax.php'); ?>

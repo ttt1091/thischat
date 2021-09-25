@@ -154,6 +154,10 @@
         }
       }
     }
+    
+    if($messages['send']==NULL){
+      $send = $myId;
+    }
   } else {
     $targetId = '';
   }
@@ -165,6 +169,3 @@
 <?php if (isset($_GET['target'])) { ?>
   <?php include($rootPath . 'parts/chat-post-form.php'); ?>
 <?php } ?>
-
-
-<?php include($rootPath . 'parts/getMessageAjax.php'); ?>

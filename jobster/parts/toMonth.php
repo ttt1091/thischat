@@ -11,8 +11,8 @@ $mcount = $manager_count->fetch(PDO::FETCH_ASSOC);
           <th colspan="<?= $mcount['mcount']+2 ?>"><?= date("Y年m月") ?></th>
         </tr>
         <tr>
-          <th class="sticky-thead">Day</th>
-          <th class="sticky-thead">SUM</th>
+          <th class="jobster-to-month-th-min">Day</th>
+          <th class="jobster-to-month-th-min">SUM</th>
 <?php
   $jobster_user_query = $dbh->query("SELECT * FROM `jobster_user_settings` WHERE `view_flag` = 1 ORDER BY id ASC");
   while ($jobster_users = $jobster_user_query->fetch(PDO::FETCH_ASSOC)) {

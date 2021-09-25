@@ -51,11 +51,12 @@
 </div><!-- //container-END -->
 
 
-<?php $dbh = null; ?>
   
 
 <?php include($rootPath.'parts/service-worker.php'); ?>
 <?php include($rootPath.'parts/bottom-js.php'); ?>
 
+
+<?php $dbh = null; ?>
 </body>
 </html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 350 349" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-1355,-21)">
+        <g transform="matrix(1,0,0,1,-0.333333,0)">
+            <g id="calendar" transform="matrix(14.5333,0,0,14.5333,1355.7,21.1952)">
+                <path d="M20,20L16,20L16,16L20,16L20,20ZM14,10L10,10L10,14L14,14L14,10ZM20,10L16,10L16,14L20,14L20,10ZM8,16L4,16L4,20L8,20L8,16ZM14,16L10,16L10,20L14,20L14,16ZM8,10L4,10L4,14L8,14L8,10ZM24,2L24,24L0,24L0,2L3,2L3,3C3,4.103 3.897,5 5,5C6.103,5 7,4.103 7,3L7,2L17,2L17,3C17,4.103 17.897,5 19,5C20.103,5 21,4.103 21,3L21,2L24,2ZM22,8L2,8L2,22L22,22L22,8ZM20,1C20,0.448 19.553,0 19,0C18.447,0 18,0.448 18,1L18,3C18,3.552 18.447,4 19,4C19.553,4 20,3.552 20,3L20,1ZM6,3C6,3.552 5.553,4 5,4C4.447,4 4,3.552 4,3L4,1C4,0.448 4.447,0 5,0C5.553,0 6,0.448 6,1L6,3Z" style="fill:rgb(51,51,51);fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
+</svg>

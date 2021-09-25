@@ -1,37 +1,66 @@
 <script>
+<?php
+$loop_manager = $dbh->prepare("SELECT * FROM `managers` WHERE `id` != :myid AND `status` = '1'");
+$loop_manager->execute([
+  'myid' => $myId
+]);
+while ($lmv = $loop_manager->fetch(PDO::FETCH_ASSOC)) {
+  echo 'console.log('.$lmv['id'].');';
+  $lmvArr[] = $lmv['id'];
+}
+foreach ($lmvArr AS $lmvs) {
+  echo 'console.log("lmvs" + '.$lmvs.');';
+}
+?>
+
 function setLocal(){
+<?php
+  foreach ($lmvArr AS $lmvs) {
+?>
   $.ajax({
-    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
+    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $lmvs ?>.json?rand=<?= rand() ?>',
     dataType: 'json',
     data: {
       name: ''
     },
     success: function(data) {
       var datalist = data;
-      localStorage.setItem("messageListTo<?= $targetId ?>", JSON.stringify(datalist));
+      localStorage.setItem("messageListTo<?= $lmvs ?>", JSON.stringify(datalist));
     }
   });
+<?php
+  }
+?>
 }
 
 function getAPImessages(){
+<?php
+  foreach ($lmvArr AS $lmvs) {
+?>
   diff = new $.Deferred();
   $.ajax({
-    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $targetId ?>.json?rand=<?= rand() ?>',
+    url: '/thechat/json/messages/users/<?= $myId ?>/message-<?= $lmvs ?>.json?rand=<?= rand() ?>',
     dataType: 'json',
     data: {
       name: ''
     },
     success: function(data) {
       let gam = data;
-      localStorage.setItem("messageListTo<?= $targetId ?>Diff", JSON.stringify(gam));
+      localStorage.setItem("messageListTo<?= $lmvs ?>Diff", JSON.stringify(gam));
       diff.resolve();
     }
   });
+<?php
+  }
+?>
 }
 
 // const getMessages = () => {
 d = new $.Deferred();
 function getMessages(){
+
+<?php if(isset($_GET['target'])){ ?>
+
   $(function() {
     $(".chat-body").html('');
     $.ajax({
@@ -185,30 +214,37 @@ function getMessages(){
       }
     });
   });
+
+<?php } ?>
+
 }
 // }
 
 $(function(){
   getMessages();
   setLocal();
+  getAPImessages();
 });
 function diffMessage() {
   getAPImessages();
   diff.promise()
   .then(function() {
-    let getLocalMessageJson = localStorage.getItem("messageListTo<?= $targetId ?>");
-    let getLocalMessageJsonDiff = localStorage.getItem("messageListTo<?= $targetId ?>Diff");
+<?php
+  foreach ($lmvArr AS $lmvs) {
+?>
+    let getLocalMessageJson<?= $lmvs ?> = localStorage.getItem("messageListTo<?= $lmvs ?>");
+    let getLocalMessageJsonDiff<?= $lmvs ?> = localStorage.getItem("messageListTo<?= $lmvs ?>Diff");
     
-    let getL = JSON.parse(getLocalMessageJson);
-    let getLD = JSON.parse(getLocalMessageJsonDiff);
+    let getL<?= $lmvs ?> = JSON.parse(getLocalMessageJson<?= $lmvs ?>);
+    let getLD<?= $lmvs ?> = JSON.parse(getLocalMessageJsonDiff<?= $lmvs ?>);
 
-    if(getL.length==getLD.length){
-      console.log('同じ');
+    if(getL<?= $lmvs ?>.length==getLD<?= $lmvs ?>.length){
+      // console.log('同じ');
       // console.log($('.chat-body').scrollTop());
     } else {
       console.log('違う');
-      console.log('getLocalMessageJson : '+getL.length);
-      console.log('getLocalMessageJsonDiff : '+getLD.length);
+      console.log('getLocalMessageJson<?= $lmvs ?> : '+getL<?= $lmvs ?>.length);
+      console.log('getLocalMessageJsonDiff<?= $lmvs ?> : '+getLD<?= $lmvs ?>.length);
       setLocal();
       getMessages();
       push();
@@ -218,6 +254,9 @@ function diffMessage() {
         $('.chat-body').scrollTop(99999);
       }
     }
+<?php
+  }
+?>
   });
 }
 

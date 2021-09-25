@@ -540,13 +540,110 @@ $jobster-left-menu-bgcolor: #333;
 }
 
 .monthy-table{
-  min-width: 700px;
-  max-width: 700px;
+  min-width: 790px;
+  max-width: 100%;
 }
 .monthy-table-cell-name{
   width: 100px;
   text-align: center;
   font-size: .7rem;
+}
+.jobster-to-month-th-min{
+  width: 37px;
+}
+
+
+
+
+
+.jobster-work-register{
+  display: flex;
+  flex-wrap: wrap;
+  .jobster-work-register-this, .jobster-work-register-next{
+    width: 100%;
+    @media screen and (min-width: 1700px){
+      width: 50%;
+    }
+  }
+  .jobster-work-register-calendar-wrap{
+    margin: 8px;
+    padding: 8px;
+    background-color: #efefef;
+    .jobster-work-register-calendar-weekly{
+      dl{
+        background-color: #FFF;
+        display: flex;
+        margin: 0;
+        dt{
+          width: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        dd{
+          margin: 0;
+          width: 150px;
+        }
+        .official-message{
+          flex-grow: 2;
+          border-left: none;
+          border-right: none;
+        }
+        dd:last-child{
+          flex-grow: 2;
+        }
+        dt,dd{
+          border-color: #CCC;
+          border-style: solid;
+          border-width: 1px;
+          border-bottom: none;
+          padding: 4px;
+        }
+        &:last-child{
+          dt,dd{
+            border-bottom: solid 1px #CCC;
+          }
+        }
+      }
+      @media screen and (min-width: 1300px){
+        display: flex;
+        dl{
+          display: block;
+          width: calc(100% / 7);
+          dt,dd{
+            border-color: #CCC;
+            border-style: solid;
+            border-width: 1px;
+            text-align: center;
+            border-right: none;
+          }
+          dt{
+            border-bottom: none;
+          }
+          dd{
+            height: 60px;
+            margin: 0;
+          }
+          .official-message{
+            height: 30px;
+            border-bottom: none;
+          }
+          .work-register{
+            width: 100%;
+            margin: 8px;
+          }
+          &:last-child{
+            dt,dd{
+              border-right: solid 1px #CCC;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.background-disable{
+  background-color: #EDEDED!important;
 }
 
 /*************************

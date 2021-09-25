@@ -58,6 +58,7 @@ if(isset($_POST['register'])){
       $loginSets = $loginSet->fetch(PDO::FETCH_ASSOC);
 
       
+      // JobSter Register
       $jobster_create = $dbh->prepare("INSERT INTO `jobster_user_settings`(
         manager_id,name,user_mode,view_flag
       ) VALUES (
@@ -73,6 +74,21 @@ if(isset($_POST['register'])){
       $jobster_create->execute();
       $dbh->commit();
       
+      // Json File Touch
+      $loop_manager = $dbh->prepare("SELECT * FROM `managers` WHERE `id` != :myid AND `status` = '1'");
+      $loop_manager->execute([
+        'myid' => $loginSets['id']
+      ]);
+      while ($lmv = $loop_manager->fetch(PDO::FETCH_ASSOC)) {
+        
+        exec('mkdir /var/www/html/thechat/json/messages/users/'.strval($loginSets['id']));
+        exec('mkdir /var/www/html/thechat/json/messages/users/'.strval($lmv['id']));
+        exec('touch /var/www/html/thechat/json/messages/users/'.strval($loginSets['id']).'/message-'.strval($lmv['id']).'.json');
+        exec('touch /var/www/html/thechat/json/messages/users/'.strval($lmv['id']).'/message-'.strval($loginSets['id']).'.json');
+        file_put_contents('/var/www/html/thechat/json/messages/users/'.strval($loginSets['id']).'/message-'.strval($lmv['id']).'.json', json_encode('', JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        file_put_contents('/var/www/html/thechat/json/messages/users/'.strval($lmv['id']).'/message-'.strval($loginSets['id']).'.json', json_encode('', JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+      }
+
       setcookie('theChatYouID', $loginSets['id'], time()+43200);
       setcookie('key', $loginSets['user_key'], time()+43200);
 
