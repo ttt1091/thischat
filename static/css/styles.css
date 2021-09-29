@@ -730,7 +730,7 @@
   width: 100%;
 }
 
-@media screen and (min-width: 1700px) {
+@media screen and (min-width: 2000px) {
   .jobster-work-register .jobster-work-register-this, .jobster-work-register .jobster-work-register-next {
     width: 50%;
   }
@@ -799,6 +799,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin-bottom: -2px;
   }
   .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl {
     display: block;
@@ -809,18 +810,22 @@
     border-style: solid;
     border-width: 1px;
     text-align: center;
-    border-right: none;
   }
   .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dt {
     border-bottom: none;
+    width: 100%;
+    border-right: none;
   }
   .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl dd {
     height: 60px;
     margin: 0;
+    width: 100%;
+    border-right: none;
   }
   .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl .official-message {
     height: 30px;
     border-bottom: none;
+    border-left: solid 1px #CCC;
   }
   .jobster-work-register .jobster-work-register-calendar-wrap .jobster-work-register-calendar-weekly dl .work-register {
     width: 100%;
@@ -833,6 +838,14 @@
 
 .background-disable {
   background-color: #EDEDED !important;
+}
+
+.background-saturday {
+  background-color: #58B2DC !important;
+}
+
+.background-sunday {
+  background-color: #F8C3CD !important;
 }
 
 /*************************
