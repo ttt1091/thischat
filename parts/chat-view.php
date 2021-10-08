@@ -155,7 +155,7 @@
       }
     }
     
-    if($messages['send']==NULL){
+    if($send==NULL){
       $send = $myId;
     }
   } else {

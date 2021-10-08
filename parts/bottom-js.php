@@ -30,11 +30,12 @@ $('.close-mask').on('click',
 //  .then(function() {
 //    $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
 //  });
-$(function(){
-	setTimeout(function(){
-  $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
-},2000);
-});
+//  $(function(){
+//  	setTimeout(function(){
+//    $(".chat-body").animate({scrollTop:$('#<?= $_GET['read'] ?>').offset().top-104}, { duration: 10, easing: 'swing', });
+//  },2000);
+//  });
+  $('.chat-body').scrollTop(99999);
 <?php } else { ?>
   $('.chat-body').scrollTop(99999);
 <?php } ?>
